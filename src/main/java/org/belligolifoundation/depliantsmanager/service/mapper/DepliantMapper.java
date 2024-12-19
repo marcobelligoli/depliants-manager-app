@@ -11,5 +11,6 @@ public interface DepliantMapper {
     DepliantMapper INSTANCE = Mappers.getMapper(DepliantMapper.class);
 
     DepliantDTO toDTO(Depliant depliant);
+
     Depliant toEntity(DepliantDTO depliantDTO);
 }
