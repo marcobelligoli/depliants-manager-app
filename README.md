@@ -16,7 +16,7 @@ are handled using **Liquibase**, and **PostgreSQL** is used as the database.
 
 - **User Management**: Users can register, log in, and manage their own depliants.
 - **Depliants Management**:
-    - Add depliants with fields like description, event name, notes, and language tags.
+    - Add depliants with fields like description, event name, notes, and language.
     - Edit or delete existing depliants.
     - Paginated view of depliants.
 - **Secure Access**: Each user has access only to their depliants.
@@ -46,12 +46,12 @@ are handled using **Liquibase**, and **PostgreSQL** is used as the database.
 
     - Create a PostgreSQL database:
       ```sql
-      CREATE DATABASE depliants_manager;
+      CREATE DATABASE dmadb;
       ```
 
     - Update the database credentials in ```src/main/resources/application.properties```:
        ```properties
-       spring.datasource.url=jdbc:postgresql://localhost:5432/depliants_manager
+       spring.datasource.url=jdbc:postgresql://localhost:5432/dmadb
        spring.datasource.username=your_postgres_user
        spring.datasource.password=your_postgres_password
        ```
