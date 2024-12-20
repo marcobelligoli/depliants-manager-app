@@ -2,7 +2,6 @@ package org.belligolifoundation.depliantsmanager.service;
 
 import org.belligolifoundation.depliantsmanager.model.User;
 import org.belligolifoundation.depliantsmanager.model.dto.UserDTO;
-import org.belligolifoundation.depliantsmanager.model.dto.UserDTO;
 import org.belligolifoundation.depliantsmanager.repository.UserRepository;
 import org.belligolifoundation.depliantsmanager.service.mapper.UserMapper;
 import org.slf4j.Logger;
