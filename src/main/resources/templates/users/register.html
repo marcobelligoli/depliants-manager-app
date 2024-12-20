@@ -8,35 +8,38 @@
 </head>
 
 <body>
-<div class="form-container">
+<div class="container">
+    <h1 class="app-title">Depliants Manager</h1>
+    <div class="form-container">
 
-    <div th:if="${param.success}">
-        <div class="success-message">
-            <p>Registration Successful!</p>
+        <div th:if="${param.success}">
+            <div class="success-message">
+                <p>Registration Successful!</p>
+            </div>
         </div>
-    </div>
 
-    <h2>Registration</h2>
-    <form th:action="@{/users/register}" method="post" role="form" th:object="${user}">
-        <label for="email">Email:</label>
-        <input th:field="*{email}" type="text" id="email" name="email" placeholder="Enter your Email"
-               required>
+        <h2>Registration</h2>
+        <form th:action="@{/users/register}" method="post" role="form" th:object="${user}">
+            <label for="email">Email:</label>
+            <input th:field="*{email}" type="text" id="email" name="email" placeholder="Enter your Email"
+                   required>
 
-        <label for="username">Username:</label>
-        <input th:field="*{username}" type="text" id="username" name="username" placeholder="Enter your Username"
-               required>
+            <label for="username">Username:</label>
+            <input th:field="*{username}" type="text" id="username" name="username" placeholder="Enter your Username"
+                   required>
 
-        <label for="password">Password:</label>
-        <input th:field="*{password}" type="password" id="password" name="password"
-               placeholder="Enter your Password" required>
+            <label for="password">Password:</label>
+            <input th:field="*{password}" type="password" id="password" name="password"
+                   placeholder="Enter your Password" required>
 
-        <button type="submit">Register</button>
-    </form>
-    <div>
-        <span th:if="${Userexist}" style="color: red;">Username is Taken</span>
-    </div>
-    <div>
-        <p class="form-footer">Already have an account? <a th:href="@{/users/login1}">Login</a> here.</p>
+            <button type="submit">Register</button>
+        </form>
+        <div>
+            <span th:if="${Userexist}" style="color: red;">Username is Taken</span>
+        </div>
+        <div>
+            <p class="form-footer">Already have an account? <a th:href="@{/users/login1}">Login</a> here.</p>
+        </div>
     </div>
 </div>
 </body>
