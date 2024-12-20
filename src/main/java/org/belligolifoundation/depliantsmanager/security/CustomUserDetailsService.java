@@ -1,18 +1,23 @@
-package org.belligolifoundation.depliantsmanager.config;
+package org.belligolifoundation.depliantsmanager.security;
 
 import org.belligolifoundation.depliantsmanager.model.User;
 import org.belligolifoundation.depliantsmanager.repository.UserRepository;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.List;
+
 @Service
-public class DMAUserDetailsServiceImpl implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-    public DMAUserDetailsServiceImpl(UserRepository userRepository) {
+    public CustomUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -22,11 +27,10 @@ public class DMAUserDetailsServiceImpl implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
+        return new CustomUserDetails(user.getUsername(), user.getPassword(), authorities(), user.getEmail());
+    }
 
-        return org.springframework.security.core.userdetails.User
-                .withUsername(user.getUsername())
-                .password(user.getPassword())
-                .roles("USER")
-                .build();
+    public Collection<GrantedAuthority> authorities() {
+        return List.of(new SimpleGrantedAuthority("USER"));
     }
 }

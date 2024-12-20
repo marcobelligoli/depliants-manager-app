@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
       id: 1
-      author: your_name
+      author: marco.belligoli
       changes:
         - createTable:
-            tableName: user
+            tableName: dma_user
             columns:
               - column:
                   name: id
@@ -48,7 +48,7 @@ databaseChangeLog:
                   name: notes
                   type: TEXT
               - column:
-                  name: language_tags
+                  name: language
                   type: VARCHAR(255)
               - column:
                   name: insert_date
@@ -67,5 +67,6 @@ databaseChangeLog:
         - addForeignKeyConstraint:
             baseTableName: depliant
             baseColumnNames: user_id
-            referencedTableName: user
+            referencedTableName: dma_user
+            constraintName: depliant_user_id_fk
             referencedColumnNames: id

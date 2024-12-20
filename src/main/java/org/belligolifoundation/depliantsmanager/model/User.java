@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@Table(name = "dma_user")
 @Entity
 public class User {
 

@@ -20,19 +20,25 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    public String showRegistrationForm(Model model) {
-        model.addAttribute("user", new UserDTO());
+    public String showRegistrationForm(Model model, UserDTO userRegistrationDTO) {
+        model.addAttribute("user", userRegistrationDTO);
         return "users/register";
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute UserDTO userDTO) {
-        userService.registerUser(userDTO);
-        return "redirect:/login";
+    public String registerUser(@ModelAttribute("user") UserDTO userRegistrationDTO, Model model) {
+        UserDTO user = userService.findByUsername(userRegistrationDTO.getUsername());
+        if (user != null) {
+            model.addAttribute("Userexist", user);
+            return "users/register";
+        }
+        userService.registerUser(userRegistrationDTO);
+        return "redirect:/register?success";
     }
 
     @GetMapping("/login")
-    public String showLoginForm() {
+    public String showLoginForm(Model model, UserDTO userDTO) {
+        model.addAttribute("user", userDTO);
         return "users/login";
     }
 }

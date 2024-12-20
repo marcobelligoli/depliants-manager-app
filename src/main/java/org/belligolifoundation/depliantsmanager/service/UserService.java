@@ -1,6 +1,7 @@
 package org.belligolifoundation.depliantsmanager.service;
 
 import org.belligolifoundation.depliantsmanager.model.dto.UserDTO;
+import org.belligolifoundation.depliantsmanager.model.dto.UserDTO;
 
 /**
  * User service
