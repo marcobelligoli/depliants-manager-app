@@ -129,26 +129,6 @@ a:hover {
     background-color: #299d00;
 }
 
-label {
-    font-size: 1rem;
-    margin-bottom: 5px;
-    color: #333;
-}
-
-input[type="text"], textarea {
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-textarea {
-    resize: vertical;
-    min-height: 100px;
-}
-
 button[type="submit"] {
     background-color: #1e90ff;
     color: white;
