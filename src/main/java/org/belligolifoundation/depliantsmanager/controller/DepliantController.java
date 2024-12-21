@@ -26,12 +26,14 @@ public class DepliantController {
 
     @GetMapping
     public String listDepliants(Model model, @AuthenticationPrincipal UserDetails userDetails,
-                                @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+                                @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
+                                @RequestParam(required = false) String search) {
         UserDTO user = userService.findByUsername(userDetails.getUsername());
-        Page<DepliantDTO> depliants = depliantService.getDepliantsByUser(user.getId(), PageRequest.of(page, size));
+        Page<DepliantDTO> depliants = depliantService.getDepliantsByUser(user.getId(), PageRequest.of(page, size), search);
         model.addAttribute("depliants", depliants.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", depliants.getTotalPages());
+        model.addAttribute("searchTerms", search);
         return "depliants/list";
     }
 

@@ -4,6 +4,56 @@
     <title>Depliant List</title>
     <link th:href="@{/css/common.css}" rel="stylesheet"/>
     <link th:href="@{/css/depliant.css}" rel="stylesheet"/>
+    <style>
+        .search-form {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 50px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 5px 15px;
+            max-width: 600px;
+            width: 100%;
+            transition: box-shadow 0.3s ease;
+            margin: 20px auto;
+        }
+
+        .search-form:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-input {
+            border: none;
+            outline: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            width: 100%;
+            border-radius: 30px;
+            margin-right: 10px;
+        }
+
+        .search-input::placeholder {
+            color: #aaa;
+        }
+
+        .search-btn {
+            background-color: #4CAF50;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-btn:hover {
+            background-color: #45a049;
+        }
+
+        .search-icon {
+            font-size: 18px;
+            color: white;
+        }
+    </style>
 </head>
 <body>
 <header style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #ccc;">
@@ -16,9 +66,23 @@
     </form>
 </header>
 <h2>Your Depliants</h2>
-<div>
-    <a th:href="@{/depliants/new}" class="button">Add New Depliant</a>
+
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; gap: 170px;">
+    <!-- Form di ricerca a sinistra -->
+    <form th:action="@{/depliants}" method="get" class="search-form">
+        <input type="text" name="search" placeholder="Search by description, event name..." th:value="${searchTerm}" class="search-input" required>
+        <button type="submit" class="search-btn">
+            <span class="search-icon">&#128269;</span>
+        </button>
+    </form>
+
+
+    <!-- Link "Add New Depliant" a destra -->
+    <div style="flex-shrink: 0;">
+        <a th:href="@{/depliants/new}" class="button">Add New Depliant</a>
+    </div>
 </div>
+
 <!-- List of depliants -->
 <table>
     <thead>
@@ -48,11 +112,11 @@
 <!-- Pagination controls -->
 <div>
     <a th:if="${currentPage > 0}"
-       th:href="@{/depliants(page=${currentPage - 1})}"
+       th:href="@{/depliants(page=${currentPage - 1}, search=${searchTerm})}"
        class="little-button">Previous</a>
     <span>Page <span th:text="${currentPage + 1}"></span> of <span th:text="${totalPages > 0 ? totalPages : 1}"></span></span>
     <a th:if="${currentPage + 1 < totalPages}"
-       th:href="@{/depliants(page=${currentPage + 1})}"
+       th:href="@{/depliants(page=${currentPage + 1}, search=${searchTerm})}"
        class="little-button">Next</a>
 </div>
 </body>

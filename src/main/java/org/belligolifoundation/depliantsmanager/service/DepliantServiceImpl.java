@@ -3,12 +3,14 @@ package org.belligolifoundation.depliantsmanager.service;
 import org.belligolifoundation.depliantsmanager.exception.DepliantNotFoundException;
 import org.belligolifoundation.depliantsmanager.model.Depliant;
 import org.belligolifoundation.depliantsmanager.model.dto.DepliantDTO;
+import org.belligolifoundation.depliantsmanager.model.spec.DepliantSpecification;
 import org.belligolifoundation.depliantsmanager.repository.DepliantRepository;
 import org.belligolifoundation.depliantsmanager.service.mapper.DepliantMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -24,9 +26,13 @@ public class DepliantServiceImpl implements DepliantService {
     }
 
     @Override
-    public Page<DepliantDTO> getDepliantsByUser(Long userId, Pageable pageable) {
+    public Page<DepliantDTO> getDepliantsByUser(Long userId, Pageable pageable, String search) {
         logger.debug("Searching depliant by user [{}]...", userId);
-        return depliantRepository.findByUserId(userId, pageable).map(DepliantMapper.INSTANCE::toDTO);
+        Specification<Depliant> spec = Specification.allOf(
+                DepliantSpecification.withUserId(userId),
+                DepliantSpecification.search(search)
+        );
+        return depliantRepository.findAll(spec, pageable).map(DepliantMapper.INSTANCE::toDTO);
     }
 
     @Override

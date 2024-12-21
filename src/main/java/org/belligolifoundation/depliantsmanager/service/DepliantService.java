@@ -14,9 +14,10 @@ public interface DepliantService {
      *
      * @param userId   The user id
      * @param pageable Pagination info
+     * @param search   Search filters
      * @return Depliants found
      */
-    Page<DepliantDTO> getDepliantsByUser(Long userId, Pageable pageable);
+    Page<DepliantDTO> getDepliantsByUser(Long userId, Pageable pageable, String search);
 
     /**
      * Get depliant by id
