@@ -4,6 +4,24 @@
     <title>Depliant Form</title>
     <link th:href="@{/css/common.css}" rel="stylesheet"/>
     <link th:href="@{/css/depliant.css}" rel="stylesheet"/>
+    <style>
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        form div {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
 </head>
 <body>
 <h2 th:text="${depliant.id == null ? 'Add New Depliant' : 'Update Depliant'}"></h2>
