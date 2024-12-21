@@ -1,5 +1,6 @@
 package org.belligolifoundation.depliantsmanager.service;
 
+import org.belligolifoundation.depliantsmanager.exception.DepliantNotFoundException;
 import org.belligolifoundation.depliantsmanager.model.Depliant;
 import org.belligolifoundation.depliantsmanager.model.dto.DepliantDTO;
 import org.belligolifoundation.depliantsmanager.repository.DepliantRepository;
@@ -26,6 +27,13 @@ public class DepliantServiceImpl implements DepliantService {
     public Page<DepliantDTO> getDepliantsByUser(Long userId, Pageable pageable) {
         logger.debug("Searching depliant by user [{}]...", userId);
         return depliantRepository.findByUserId(userId, pageable).map(DepliantMapper.INSTANCE::toDTO);
+    }
+
+    @Override
+    public DepliantDTO getDepliantById(Long id) {
+        logger.debug("Getting depliant by id [{}]...", id);
+        var depliant = depliantRepository.findById(id).orElseThrow(() -> new DepliantNotFoundException(id));
+        return DepliantMapper.INSTANCE.toDTO(depliant);
     }
 
     @Override

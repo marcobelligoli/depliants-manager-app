@@ -19,6 +19,14 @@ public interface DepliantService {
     Page<DepliantDTO> getDepliantsByUser(Long userId, Pageable pageable);
 
     /**
+     * Get depliant by id
+     *
+     * @param id The id of depliant
+     * @return Depliant found
+     */
+    DepliantDTO getDepliantById(Long id);
+
+    /**
      * Save a new depliant
      *
      * @param depliantDTO Depliant to save

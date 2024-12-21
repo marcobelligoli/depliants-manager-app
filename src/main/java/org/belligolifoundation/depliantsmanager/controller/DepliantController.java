@@ -25,12 +25,8 @@ public class DepliantController {
     }
 
     @GetMapping
-    public String listDepliants(
-            Model model,
-            @AuthenticationPrincipal UserDetails userDetails,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size
-    ) {
+    public String listDepliants(Model model, @AuthenticationPrincipal UserDetails userDetails,
+                                @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
         UserDTO user = userService.findByUsername(userDetails.getUsername());
         Page<DepliantDTO> depliants = depliantService.getDepliantsByUser(user.getId(), PageRequest.of(page, size));
         model.addAttribute("depliants", depliants.getContent());
@@ -42,6 +38,7 @@ public class DepliantController {
     @GetMapping("/new")
     public String newDepliantForm(Model model) {
         model.addAttribute("depliant", new DepliantDTO());
+        model.addAttribute("formAction", "/depliants");
         return "depliants/form";
     }
 
@@ -53,12 +50,17 @@ public class DepliantController {
         return "redirect:/depliants";
     }
 
+    @GetMapping("/update/{id}")
+    public String updateDepliantForm(@PathVariable Long id, Model model) {
+        DepliantDTO depliantDTO = depliantService.getDepliantById(id);
+        model.addAttribute("depliant", depliantDTO);
+        model.addAttribute("formAction", "/depliants/update/" + id);
+        return "depliants/form";
+    }
+
     @PostMapping("/update/{id}")
-    public String updateDepliant(
-            @PathVariable Long id,
-            @ModelAttribute DepliantDTO depliantDTO,
-            @AuthenticationPrincipal UserDetails userDetails
-    ) {
+    public String updateDepliant(@PathVariable Long id, @ModelAttribute DepliantDTO depliantDTO,
+                                 @AuthenticationPrincipal UserDetails userDetails) {
         UserDTO user = userService.findByUsername(userDetails.getUsername());
         depliantDTO.setUserId(user.getId());
         depliantDTO.setId(id);
