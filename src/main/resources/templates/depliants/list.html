@@ -69,13 +69,15 @@
 
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; gap: 170px;">
     <!-- Form di ricerca a sinistra -->
-    <form th:action="@{/depliants}" method="get" class="search-form">
-        <input type="text" name="search" placeholder="Search by description, event name..." th:value="${searchTerm}" class="search-input" required>
-        <button type="submit" class="search-btn">
-            <span class="search-icon">&#128269;</span>
+    <form th:action="@{/depliants}" method="get"
+          style="display: flex; flex-wrap: nowrap; gap: 10px; ">
+        <input type="text" name="search" placeholder="Search by description, event name..." th:value="${searchTerm}"
+               style="padding: 5px; height: 40px;">
+        <button type="submit"
+                style="padding: 5px 10px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; height: 40px;">
+            Search
         </button>
     </form>
-
 
     <!-- Link "Add New Depliant" a destra -->
     <div style="flex-shrink: 0;">
