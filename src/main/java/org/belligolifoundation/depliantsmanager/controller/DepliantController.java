@@ -26,7 +26,7 @@ public class DepliantController {
 
     @GetMapping
     public String listDepliants(Model model, @AuthenticationPrincipal UserDetails userDetails,
-                                @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
+                                @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size,
                                 @RequestParam(required = false) String search) {
         UserDTO user = userService.findByUsername(userDetails.getUsername());
         Page<DepliantDTO> depliants = depliantService.getDepliantsByUser(user.getId(), PageRequest.of(page, size), search);
