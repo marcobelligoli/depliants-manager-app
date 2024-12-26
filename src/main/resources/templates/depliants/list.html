@@ -72,6 +72,7 @@
 <table>
     <thead>
     <tr>
+        <th>Number</th>
         <th>Description</th>
         <th>Event Name</th>
         <th>Notes</th>
@@ -81,6 +82,7 @@
     </thead>
     <tbody>
     <tr th:each="depliant : ${depliants}">
+        <td th:text="${depliant.number}"></td>
         <td th:text="${depliant.description}"></td>
         <td th:text="${depliant.eventName}"></td>
         <td th:text="${depliant.notes}"></td>

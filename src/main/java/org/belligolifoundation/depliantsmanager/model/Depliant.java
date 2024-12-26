@@ -17,6 +17,9 @@ public class Depliant {
     private Long id;
 
     @Column(nullable = false)
+    private Integer number;
+
+    @Column(nullable = false)
     private String description;
 
     @Column(nullable = false)

@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 public class DepliantDTO {
 
     private Long id;
+    private Integer number;
     private String description;
     private String eventName;
     private String notes;
