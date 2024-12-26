@@ -75,3 +75,8 @@ databaseChangeLog:
             referencedTableName: dma_user
             constraintName: depliant_user_id_fk
             referencedColumnNames: id
+
+        - addUniqueConstraint:
+            tableName: depliant
+            columnNames: number
+            constraintName: unique_number_depliant
