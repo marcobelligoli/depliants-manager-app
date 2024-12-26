@@ -3,3 +3,71 @@ h2 {
     text-align: center;
     margin-bottom: 20px;
 }
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1e90ff;
+    color: white;
+    padding: 10px 20px 10px;
+    border-bottom: 1px solid #ccc;
+    width: 99%;
+}
+
+.input[type="text"] {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    width: 100%;
+    border-radius: 4px;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.depliant-input {
+    padding: 10px;
+    font-size: 16px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+}
+
+.depliant-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #ccc;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-weight: bold;
+    
+}
+
+.depliant-button:hover {
+    background-color: #45a049;
+    text-decoration: underline;
+}
+
+.logout-button {
+    background-color: #db3024;
+    color: white;
+    border: none;
+    padding: 8px 16px ;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.logout-button:hover {
+    background-color: #8f2119;
+    text-decoration: underline;
+    
+}
