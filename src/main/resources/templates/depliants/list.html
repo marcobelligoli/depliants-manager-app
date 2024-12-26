@@ -4,67 +4,31 @@
     <title>Depliant List</title>
     <link th:href="@{/css/common.css}" rel="stylesheet"/>
     <link th:href="@{/css/depliant.css}" rel="stylesheet"/>
-    <style>
-        input[type="text"] {
-            padding: 10px 20px;
-            font-size: 1rem;
-            border: 1px solid #ccc;
-            width: 100%;
-            border-radius: 4px;
-        }
-    </style>
 </head>
+
 <body>
-<header style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #ccc;">
-    <h1 style="margin: 0 20px;">Depliant Manager</h1>
-    <form th:action="@{/logout}" method="post" style="margin: 0 20px;">
-        <button type="submit"
-                style="padding: 5px 10px; background-color: #f44336; color: white; border: none; border-radius: 5px; cursor: pointer;">
-            Logout
-        </button>
-    </form>
-</header>
-<h2>Your Depliants</h2>
-
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; gap: 170px;">
-    <!-- Form di ricerca a sinistra -->
-    <form th:action="@{/depliants}" method="get"
-          style="display: flex; align-items: center; ">
-        <input type="text" name="search" placeholder="Search by description, event name..." th:value="${searchTerm}"
-               style="padding: 5px 10px; height: 40px;">
-        <button type="submit"
-                style="padding: 5px 10px; background-color: #299d00; color: white; border: none; border-radius: 5px; height: 40px;">
-            Search 
-        </button>
-    </form>
-
-<!-- 
-    <div style="display: flex; justify-content: space-between; align-items: center; background-color: #2583d6; color: white; padding: 10px 20px 10px;  border-bottom: 1px solid #ccc; width: 99%;">
+    <div class="top-bar">
         <h1 style="margin: 0 20px;">Depliant Manager</h1> 
-        <button th:action="@{/logout}"  class="button" style="background-color: #db3024; color: white; border: none; padding: 8px 16px ; font-size: 16px; cursor: pointer; border-radius: 5px;">
-            Logout
-        </button> 
+            <button th:action="@{/logout}"  class="logout-button">
+                Logout
+            </button> 
       </div>
 
 <h2>Your Depliants</h2>
 
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; gap: 170px;">
-  
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 170px;">
+    <!-- Form di ricerca a sinistra -->
     <form th:action="@{/depliants}" method="get" style="display: flex; align-items: center; justify-content: space-between;">
-        <input type="text" name="search" placeholder="Search by description, event name..." th:value="${searchTerm}" style="padding: 5px 10px; height: 30px; margin-right: 20px;">
-        <button type="submit" style="padding: 8px 16px ; background-color: #299d00; color: white; border: none; border-radius: 5px; height: 40px; align-items: center; margin-bottom: 15px; ">
-            Search
-        </button>
+        
+            <input type="text" name="search" class="depliant-input" placeholder="Search by description, event name, etc." th:value="${searchTerm}">
+            <button type="submit" class="depliant-button">
+                Search
+            </button>
     </form>
 
-    <div style="flex-shrink: 0;">
-        <a th:href="@{/depliants/new}" class="button" style="margin-bottom: 10px;">Add New Depliant</a>
-    </div>
-</div> -->
-    
     <!-- Link "Add New Depliant" a destra -->
     <div style="flex-shrink: 0;">
-        <a th:href="@{/depliants/new}" class="button">Add New Depliant</a>
+        <a th:href="@{/depliants/new}" class="button" style="margin-bottom: 15px;">Add New Depliant</a>
     </div>
 </div>
 
