@@ -6,6 +6,7 @@ import org.belligolifoundation.depliantsmanager.service.DepliantService;
 import org.belligolifoundation.depliantsmanager.service.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -29,7 +30,8 @@ public class DepliantController {
                                 @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size,
                                 @RequestParam(required = false) String search) {
         UserDTO user = userService.findByUsername(userDetails.getUsername());
-        Page<DepliantDTO> depliants = depliantService.getDepliantsByUser(user.getId(), PageRequest.of(page, size), search);
+        Sort sort = Sort.by(Sort.Direction.fromString("desc"), "number");
+        Page<DepliantDTO> depliants = depliantService.getDepliantsByUser(user.getId(), PageRequest.of(page, size, sort), search);
         model.addAttribute("depliants", depliants.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", depliants.getTotalPages());
