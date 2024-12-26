@@ -146,7 +146,7 @@ a:hover {
     background-color: #299d00;
 }
 
-button[type="submit"] {
+.button[type="submit"] {
     background-color: #1e90ff;
     color: white;
     padding: 10px 20px;
@@ -159,7 +159,7 @@ button[type="submit"] {
     align-self: flex-start;
 }
 
-button[type="submit"]:hover {
+.button[type="submit"]:hover {
     background-color: #299d00;
 }
 
@@ -167,7 +167,7 @@ a:hover {
     text-decoration: underline;
 }
 
-button[type="submit"], a {
+.button[type="submit"], a {
     margin-top: 15px;
     display: inline-block;
 }
