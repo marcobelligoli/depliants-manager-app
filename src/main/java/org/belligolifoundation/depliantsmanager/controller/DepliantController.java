@@ -28,14 +28,15 @@ public class DepliantController {
     @GetMapping
     public String listDepliants(Model model, @AuthenticationPrincipal UserDetails userDetails,
                                 @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size,
-                                @RequestParam(required = false) String search) {
+                                @RequestParam(required = false) String search, @RequestParam(defaultValue = "desc") String sortDirection) {
         UserDTO user = userService.findByUsername(userDetails.getUsername());
-        Sort sort = Sort.by(Sort.Direction.fromString("desc"), "number");
+        Sort sort = Sort.by(Sort.Direction.fromString(sortDirection), "number");
         Page<DepliantDTO> depliants = depliantService.getDepliantsByUser(user.getId(), PageRequest.of(page, size, sort), search);
         model.addAttribute("depliants", depliants.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", depliants.getTotalPages());
         model.addAttribute("searchTerms", search);
+        model.addAttribute("sortDirection", sortDirection);
         return "depliants/list";
     }
 

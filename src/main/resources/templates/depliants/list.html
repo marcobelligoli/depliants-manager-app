@@ -72,7 +72,13 @@
 <table>
     <thead>
     <tr>
-        <th>Number</th>
+        <th>
+            <a th:href="@{/depliants(page=${currentPage}, search=${searchTerms}, sortDirection=${sortDirection == 'desc' ? 'asc' : 'desc'})}">
+                Number
+                <span th:if="${sortDirection == 'asc'}">&#9650;</span>
+                <span th:if="${sortDirection == 'desc'}">&#9660;</span>
+            </a>
+        </th>
         <th>Description</th>
         <th>Event Name</th>
         <th>Notes</th>

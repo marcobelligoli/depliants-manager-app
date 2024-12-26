@@ -65,6 +65,23 @@ table tr:hover {
     background-color: #f1f1f1;
 }
 
+table th a {
+    display: inline-flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+}
+
+table th a span {
+    margin-left: 5px;
+    font-size: 0.8rem;
+    color: white;
+}
+
 a {
     color: #1e90ff;
     text-decoration: none;
