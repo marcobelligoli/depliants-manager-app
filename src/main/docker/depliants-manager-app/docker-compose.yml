@@ -3,10 +3,8 @@ services:
   database:
     image: postgres:17.2
     container_name: depliants-manager-db
-    environment:
-      - POSTGRES_USER=dma
-      - POSTGRES_PASSWORD=dma
-      - POSTGRES_DB=dmadb
+    env_file:
+      - .env
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
