@@ -78,5 +78,5 @@ databaseChangeLog:
 
         - addUniqueConstraint:
             tableName: depliant
-            columnNames: number
-            constraintName: unique_number_depliant
+            columnNames: number, user_id
+            constraintName: unique_number_user_id
