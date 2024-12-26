@@ -47,11 +47,11 @@
         }
 
         .buttons {
-            flex-direction: row;  
+            flex-direction: row;
             gap: 30px;
             display: inline;
             margin: 10px;
-        } 
+        }
     </style> <!-- ho aggiunto .buttons per gestire save e cancel -->
 </head>
 <body>
@@ -78,10 +78,10 @@
         <label for="language">Language:</label>
         <input type="text" id="language" name="language" th:value="${depliant.language}">
     </div>
-    
+
     <div class="buttons">
-        <button type="submit" style="margin-right: 10px;">Save</button> 
-        <a th:href="@{/depliants}" >Cancel</a>
+        <button type="submit" style="margin-right: 10px;">Save</button>
+        <a th:href="@{/depliants}">Cancel</a>
     </div>
 </form>
 </body>

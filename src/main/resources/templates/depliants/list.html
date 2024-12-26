@@ -7,23 +7,25 @@
 </head>
 
 <body>
-    <div class="top-bar">
-        <h1 style="margin: 0 20px;">Depliant Manager</h1> 
-            <button th:action="@{/logout}"  class="logout-button">
-                Logout
-            </button> 
-      </div>
+<div class="top-bar">
+    <h1 style="margin: 0 20px;">Depliant Manager</h1>
+    <button th:action="@{/logout}" class="logout-button">
+        Logout
+    </button>
+</div>
 
 <h2>Your Depliants</h2>
 
 <div style="display: flex; justify-content: space-between; align-items: center; gap: 170px;">
     <!-- Form di ricerca a sinistra -->
-    <form th:action="@{/depliants}" method="get" style="display: flex; align-items: center; justify-content: space-between;">
-        
-            <input type="text" name="search" class="depliant-input" placeholder="Search by description, event name, etc." th:value="${searchTerm}">
-            <button type="submit" class="depliant-button">
-                Search
-            </button>
+    <form th:action="@{/depliants}" method="get"
+          style="display: flex; align-items: center; justify-content: space-between;">
+
+        <input type="text" name="search" class="depliant-input" placeholder="Search by description, event name, etc."
+               th:value="${searchTerm}">
+        <button type="submit" class="depliant-button">
+            Search
+        </button>
     </form>
 
     <!-- Link "Add New Depliant" a destra -->

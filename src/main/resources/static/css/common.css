@@ -47,7 +47,6 @@ h2 {
     border-radius: 0 5px 5px 0;
     cursor: pointer;
     font-weight: bold;
-    
 }
 
 .depliant-button:hover {
@@ -59,7 +58,7 @@ h2 {
     background-color: #db3024;
     color: white;
     border: none;
-    padding: 8px 16px ;
+    padding: 8px 16px;
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
@@ -69,5 +68,4 @@ h2 {
 .logout-button:hover {
     background-color: #8f2119;
     text-decoration: underline;
-    
 }
