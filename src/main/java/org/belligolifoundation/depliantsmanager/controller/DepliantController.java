@@ -4,6 +4,7 @@ import org.belligolifoundation.depliantsmanager.model.dto.DepliantDTO;
 import org.belligolifoundation.depliantsmanager.model.dto.UserDTO;
 import org.belligolifoundation.depliantsmanager.service.DepliantService;
 import org.belligolifoundation.depliantsmanager.service.UserService;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -48,11 +49,16 @@ public class DepliantController {
     }
 
     @PostMapping
-    public String saveDepliant(@ModelAttribute DepliantDTO depliantDTO, @AuthenticationPrincipal UserDetails userDetails) {
-        UserDTO user = userService.findByUsername(userDetails.getUsername());
-        depliantDTO.setUserId(user.getId());
-        depliantService.saveDepliant(depliantDTO);
-        return "redirect:/depliants";
+    public String saveDepliant(@ModelAttribute DepliantDTO depliantDTO, @AuthenticationPrincipal UserDetails userDetails,
+                               Model model) {
+        try {
+            UserDTO user = userService.findByUsername(userDetails.getUsername());
+            depliantDTO.setUserId(user.getId());
+            depliantService.saveDepliant(depliantDTO);
+            return "redirect:/depliants";
+        } catch (Exception e) {
+            return manageDepliantsFormErrors(model, e, depliantDTO, "/depliants");
+        }
     }
 
     @GetMapping("/update/{id}")
@@ -65,12 +71,23 @@ public class DepliantController {
 
     @PostMapping("/update/{id}")
     public String updateDepliant(@PathVariable Long id, @ModelAttribute DepliantDTO depliantDTO,
-                                 @AuthenticationPrincipal UserDetails userDetails) {
-        UserDTO user = userService.findByUsername(userDetails.getUsername());
-        depliantDTO.setUserId(user.getId());
-        depliantDTO.setId(id);
-        depliantService.updateDepliant(depliantDTO);
-        return "redirect:/depliants";
+                                 @AuthenticationPrincipal UserDetails userDetails, Model model) {
+        try {
+            UserDTO user = userService.findByUsername(userDetails.getUsername());
+            depliantDTO.setUserId(user.getId());
+            depliantDTO.setId(id);
+            depliantService.updateDepliant(depliantDTO);
+            return "redirect:/depliants";
+        } catch (Exception e) {
+            return manageDepliantsFormErrors(model, e, depliantDTO, "/depliants/update/" + id);
+        }
+    }
+
+    private static String manageDepliantsFormErrors(Model model, Exception e, DepliantDTO depliantDTO, String id) {
+        model.addAttribute("errorData", e instanceof DataIntegrityViolationException ? "submitted data not valid." : e.getMessage());
+        model.addAttribute("depliant", depliantDTO);
+        model.addAttribute("formAction", id);
+        return "depliants/form";
     }
 
     @GetMapping("/delete/{id}")

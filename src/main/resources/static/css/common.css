@@ -69,3 +69,24 @@ h2 {
     background-color: #8f2119;
     text-decoration: underline;
 }
+
+.error-message {
+    background-color: #ffe6e6;
+    color: #b30000;
+    padding: 15px;
+    border: 1px solid #b30000;
+    border-radius: 8px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.error-message svg {
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.error-message strong {
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
