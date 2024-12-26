@@ -146,6 +146,10 @@ a:hover {
     background-color: #299d00;
 }
 
+.little-button-delete:hover {
+    background-color: #db3024;
+}
+
 .button[type="submit"] {
     background-color: #1e90ff;
     color: white;
