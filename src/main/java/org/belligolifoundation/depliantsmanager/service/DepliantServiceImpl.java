@@ -55,6 +55,7 @@ public class DepliantServiceImpl implements DepliantService {
         Optional<Depliant> optionalDepliant = depliantRepository.findById(updatedDepliantDTO.getId());
         if (optionalDepliant.isPresent()) {
             Depliant existingDepliant = optionalDepliant.get();
+            existingDepliant.setNumber(updatedDepliantDTO.getNumber());
             existingDepliant.setDescription(updatedDepliantDTO.getDescription());
             existingDepliant.setEventName(updatedDepliantDTO.getEventName());
             existingDepliant.setNotes(updatedDepliantDTO.getNotes());
