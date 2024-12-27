@@ -63,16 +63,23 @@ button:hover {
 .success-message {
     background-color: #1e90ff;
     color: #fff;
+    padding: 1px;
+    border-radius: 3px;
+    text-align: center;
+}
+
+.logout-message {
+    background-color: #1e90ff;
+    color: #fff;
     padding: 10px;
     border-radius: 3px;
     text-align: center;
 }
 
-.error-message,
-.logout-message {
-    background-color: #1e90ff;
-    color: #fff;
-    padding: 10px;
+.error-message {
+    background-color: rgb(255, 156, 156);
+    color: red;
+    padding: 1px;
     border-radius: 3px;
     text-align: center;
 }
