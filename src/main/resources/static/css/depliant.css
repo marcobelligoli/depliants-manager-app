@@ -175,3 +175,12 @@ a:hover {
     margin-top: 15px;
     display: inline-block;
 }
+
+.reset {
+    color:#db3024;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
