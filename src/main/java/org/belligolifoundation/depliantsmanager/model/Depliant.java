@@ -22,7 +22,7 @@ public class Depliant {
     @Column(nullable = false)
     private String description;
 
-    @Column(nullable = false)
+    @Column
     private String eventName;
 
     @Column

@@ -47,8 +47,6 @@ databaseChangeLog:
               - column:
                   name: event_name
                   type: VARCHAR(255)
-                  constraints:
-                    nullable: false
               - column:
                   name: notes
                   type: TEXT
