@@ -4,6 +4,7 @@
     <title>Depliant Form</title>
     <link th:href="@{/css/common.css}" rel="stylesheet"/>
     <link th:href="@{/css/depliant.css}" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
         form {
             background-color: white;
@@ -84,10 +85,7 @@
         <a th:href="@{/depliants}">Cancel</a>
     </div>
     <div th:if="${errorData}" class="error-message">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M8.982 1.566a1 1 0 0 1 1.036 0l6 3.464a1 1 0 0 1 .482.865v6.93a1 1 0 0 1-.482.865l-6 3.464a1 1 0 0 1-1.036 0l-6-3.464a1 1 0 0 1-.482-.865V5.895a1 1 0 0 1 .482-.865l6-3.464zM8 3.383l-5 2.887v5.77l5 2.887 5-2.887v-5.77L8 3.383z"/>
-            <path d="M7.002 6.5a.5.5 0 0 1 1 0V9.5a.5.5 0 0 1-1 0V6.5zm1 4a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
-        </svg>
+        <i class="fas fa-exclamation-circle"></i>
         <strong>Error:</strong>
         <span th:text="${errorData}"></span>
     </div>
