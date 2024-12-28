@@ -25,6 +25,7 @@
 
         <input type="text" name="search" class="depliant-input" placeholder="Search by description, event name, etc."
                th:value="${searchTerms}">
+        <input type="hidden" name="sortDirection" th:value="${sortDirection}">
         <button type="submit" class="depliant-button">
             Search
         </button>
