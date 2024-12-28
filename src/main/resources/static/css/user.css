@@ -61,27 +61,14 @@ button:hover {
 }
 
 .success-message {
-    background-color: #1e90ff;
-    color: #fff;
-    padding: 1px;
-    border-radius: 3px;
-    text-align: center;
-}
-
-.logout-message {
-    background-color: #1e90ff;
-    color: #fff;
-    padding: 10px;
-    border-radius: 3px;
-    text-align: center;
-}
-
-.error-message {
-    background-color: rgb(255, 156, 156);
-    color: red;
-    padding: 1px;
-    border-radius: 3px;
-    text-align: center;
+    background-color: #d6ecff;
+    color: #1e90ff;
+    padding: 15px;
+    border: 1px solid #1e90ff;
+    border-radius: 8px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
 }
 
 .app-title {

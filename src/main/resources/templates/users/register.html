@@ -13,6 +13,11 @@
     <h1 class="app-title">Depliants Manager</h1>
     <div class="form-container">
 
+        <div th:if="${Userexist}">
+            <div class="error-message">
+                <p>Username is Taken</p>
+            </div>
+        </div>
         <div th:if="${param.success}">
             <div class="success-message">
                 <p>Registration Successful!</p>
@@ -35,9 +40,6 @@
 
             <button type="submit">Register</button>
         </form>
-        <div>
-            <span th:if="${Userexist}" style="color: red;">Username is Taken</span>
-        </div>
         <div>
             <p class="form-footer">Already have an account? <a th:href="@{/users/login1}">Login</a> here.</p>
         </div>
