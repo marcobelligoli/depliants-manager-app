@@ -24,7 +24,7 @@
           style="display: flex; align-items: center; justify-content: space-between;">
 
         <input type="text" name="search" class="depliant-input" placeholder="Search by description, event name, etc."
-               th:value="${searchTerm}">
+               th:value="${searchTerms}">
         <button type="submit" class="depliant-button">
             Search
         </button>
@@ -74,11 +74,11 @@
 <!-- Pagination controls -->
 <div>
     <a th:if="${currentPage > 0}"
-       th:href="@{/depliants(page=${currentPage - 1}, search=${searchTerm})}"
+       th:href="@{/depliants(page=${currentPage - 1}, search=${searchTerms}, sortDirection=${sortDirection})}"
        class="little-button">Previous</a>
     <span>Page <span th:text="${currentPage + 1}"></span> of <span th:text="${totalPages > 0 ? totalPages : 1}"></span></span>
     <a th:if="${currentPage + 1 < totalPages}"
-       th:href="@{/depliants(page=${currentPage + 1}, search=${searchTerm})}"
+       th:href="@{/depliants(page=${currentPage + 1}, search=${searchTerms}, sortDirection=${sortDirection})}"
        class="little-button">Next</a>
 </div>
 </body>
