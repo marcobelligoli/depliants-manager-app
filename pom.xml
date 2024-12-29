@@ -10,7 +10,7 @@
     </parent>
     <groupId>org.belligolifoundation</groupId>
     <artifactId>depliants-manager-app</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>depliants-manager-app</name>
     <description>Application to manage depliants collected during events and fairs</description>
     <properties>
