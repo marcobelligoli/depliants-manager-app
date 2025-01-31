@@ -2,6 +2,7 @@ version: '3'
 services:
   database:
     image: postgres:17.2
+    restart: unless-stopped
     container_name: depliants-manager-db
     env_file:
       - .env
@@ -14,5 +15,15 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+  service:
+    image: ghcr.io/marcobelligoli/depliants-manager-app:0.0.1
+    restart: unless-stopped
+    container_name: depliants-manager-service
+    env_file:
+      - .env
+    ports:
+      - "7271:8080"
+    depends_on:
+      - database
 volumes:
   postgres_data:
