@@ -63,3 +63,8 @@ are handled using **Liquibase**, and **PostgreSQL** is used as the database.
 4. **Access the Application**
    Open your browser and navigate to: http://localhost:8080
    Register a new user or log in with an existing account.
+
+## Setup with Docker
+
+Run [docker compose file](src/main/docker/depliants-manager-app/docker-compose.yml) to run the application as Docker
+container.
