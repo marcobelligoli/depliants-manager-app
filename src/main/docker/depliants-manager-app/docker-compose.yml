@@ -16,7 +16,7 @@ services:
       timeout: 10s
       retries: 5
   service:
-    image: ghcr.io/marcobelligoli/depliants-manager-app:0.0.1
+    image: ghcr.io/marcobelligoli/depliants-manager-app:latest
     restart: unless-stopped
     container_name: depliants-manager-service
     env_file:
