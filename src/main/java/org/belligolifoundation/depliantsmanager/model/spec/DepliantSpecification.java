@@ -22,21 +22,19 @@ public class DepliantSpecification {
     }
 
     public static Specification<Depliant> search(String searchString) {
-        if (searchString != null) {
-            searchString = "%" + searchString + "%";
-        }
-
-        String finalSearchString = searchString;
         return (Root<Depliant> root, CriteriaQuery<?> query, CriteriaBuilder cb) -> {
-            if (finalSearchString == null) {
+
+            if (searchString == null || searchString.isBlank()) {
                 return cb.conjunction();
             }
 
+            String pattern = "%" + searchString.trim().toLowerCase() + "%";
+
             return cb.or(
-                    cb.like(root.get("description"), finalSearchString),
-                    cb.like(root.get("eventName"), finalSearchString),
-                    cb.like(root.get("notes"), finalSearchString),
-                    cb.like(root.get("language"), finalSearchString)
+                    cb.like(cb.lower(root.get("description")), pattern),
+                    cb.like(cb.lower(root.get("eventName")), pattern),
+                    cb.like(cb.lower(root.get("notes")), pattern),
+                    cb.like(cb.lower(root.get("language")), pattern)
             );
         };
     }
