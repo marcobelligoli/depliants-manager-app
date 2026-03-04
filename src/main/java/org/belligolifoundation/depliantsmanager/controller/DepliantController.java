@@ -86,7 +86,7 @@ public class DepliantController {
     private static String manageDepliantsFormErrors(Model model, Exception e, DepliantDTO depliantDTO, String id) {
         model.addAttribute("errorData", e instanceof DataIntegrityViolationException ? "submitted data not valid." : e.getMessage());
         model.addAttribute("depliant", depliantDTO);
-        model.addAttribute("formAction", "/depliants/" + id);
+        model.addAttribute("formAction", id);
         return "depliants/form";
     }
 
