@@ -29,7 +29,7 @@ public class UserController {
     public String registerUser(@ModelAttribute("user") UserDTO userRegistrationDTO, Model model) {
         UserDTO user = userService.findByUsername(userRegistrationDTO.getUsername());
         if (user != null) {
-            model.addAttribute("Userexist", user);
+            model.addAttribute("userExist", user);
             return "users/register";
         }
         userService.registerUser(userRegistrationDTO);

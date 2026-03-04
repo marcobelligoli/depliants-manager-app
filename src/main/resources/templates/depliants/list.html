@@ -65,8 +65,16 @@
         <td th:text="${depliant.language}"></td>
         <td>
             <a class="little-button" th:href="@{/depliants/update/{id}(id=${depliant.id})}">Update</a>
-            <a class="little-button little-button-delete" th:href="@{/depliants/delete/{id}(id=${depliant.id})}"
-               onclick="return confirm('Are you sure you want to delete this depliant?');">Delete</a>
+            <form th:action="@{/depliants/{id}(id=${depliant.id})}"
+                  method="post"
+                  style="display:inline;"
+                  onsubmit="return confirm('Are you sure you want to delete this depliant?');">
+
+                <input type="hidden" name="_method" value="delete"/>
+                <button type="submit" class="little-button little-button-delete">
+                    Delete
+                </button>
+            </form>
         </td>
     </tr>
     </tbody>

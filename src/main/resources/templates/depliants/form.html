@@ -59,6 +59,7 @@
 <h2 th:text="${depliant.id == null ? 'Add New Depliant' : 'Update Depliant'}"></h2>
 
 <form th:action="@{${formAction}}" method="post">
+    <input type="hidden" name="_method" th:if="${depliant.id != null}" value="put"/>
     <div>
         <label for="number">Number:</label>
         <input type="number" id="number" name="number" th:value="${depliant.number}" required>

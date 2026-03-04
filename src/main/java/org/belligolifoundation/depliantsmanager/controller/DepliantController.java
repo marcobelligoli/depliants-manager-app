@@ -65,11 +65,11 @@ public class DepliantController {
     public String updateDepliantForm(@PathVariable Long id, Model model) {
         DepliantDTO depliantDTO = depliantService.getDepliantById(id);
         model.addAttribute("depliant", depliantDTO);
-        model.addAttribute("formAction", "/depliants/update/" + id);
+        model.addAttribute("formAction", "/depliants/" + id);
         return "depliants/form";
     }
 
-    @PostMapping("/update/{id}")
+    @PutMapping("/{id}")
     public String updateDepliant(@PathVariable Long id, @ModelAttribute DepliantDTO depliantDTO,
                                  @AuthenticationPrincipal UserDetails userDetails, Model model) {
         try {
@@ -86,11 +86,11 @@ public class DepliantController {
     private static String manageDepliantsFormErrors(Model model, Exception e, DepliantDTO depliantDTO, String id) {
         model.addAttribute("errorData", e instanceof DataIntegrityViolationException ? "submitted data not valid." : e.getMessage());
         model.addAttribute("depliant", depliantDTO);
-        model.addAttribute("formAction", id);
+        model.addAttribute("formAction", "/depliants/" + id);
         return "depliants/form";
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public String deleteDepliant(@PathVariable Long id) {
         depliantService.deleteDepliant(id);
         return "redirect:/depliants";
