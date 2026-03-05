@@ -16,7 +16,10 @@ services:
       timeout: 10s
       retries: 5
   service:
-    image: ghcr.io/marcobelligoli/depliants-manager-app:latest
+    build:
+      context: ../../../../
+      dockerfile: Dockerfile
+    image: depliants-manager-app
     restart: unless-stopped
     container_name: depliants-manager-service
     env_file:
