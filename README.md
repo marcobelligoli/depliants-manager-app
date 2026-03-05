@@ -66,15 +66,17 @@ are handled using **Liquibase**, and **PostgreSQL** is used as the database.
 
 ## Setup with Docker
 
-Run the [Docker Compose file](src/main/docker/depliants-manager-app/docker-compose.yml) to start the application 
+Run the [Docker Compose file](src/main/docker/depliants-manager-app/docker-compose.yml) to start the application
 in a Docker container.
 
 Example from the project root:
+
 ```bash
 docker compose -f src/main/docker/depliants-manager-app/docker-compose.yml up --build -d
 ```
 
 Example from src/main/docker/depliants-manager-app folder:
+
 ```bash
 docker compose up --build -d
 ```
