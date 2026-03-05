@@ -17,7 +17,7 @@ services:
       retries: 5
   service:
     build:
-      context: ../../../../
+      context: ${PROJECT_ROOT}
       dockerfile: Dockerfile
     image: depliants-manager-app
     restart: unless-stopped
