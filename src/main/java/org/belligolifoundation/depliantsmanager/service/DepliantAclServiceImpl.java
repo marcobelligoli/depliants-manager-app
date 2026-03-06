@@ -1,7 +1,7 @@
 package org.belligolifoundation.depliantsmanager.service;
 
 import org.belligolifoundation.depliantsmanager.repository.DepliantRepository;
-import org.belligolifoundation.depliantsmanager.security.CustomUserDetails;
+import org.belligolifoundation.depliantsmanager.security.DMAUserDetails;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,7 @@ public class DepliantAclServiceImpl implements DepliantAclService {
             return false;
         }
 
-        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        DMAUserDetails userDetails = (DMAUserDetails) authentication.getPrincipal();
 
         return depliantRepository.existsByIdAndUserId(id, userDetails.getUserId());
     }

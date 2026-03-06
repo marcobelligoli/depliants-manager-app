@@ -1,7 +1,7 @@
 package org.belligolifoundation.depliantsmanager.security;
 
-import org.belligolifoundation.depliantsmanager.model.User;
-import org.belligolifoundation.depliantsmanager.repository.UserRepository;
+import org.belligolifoundation.depliantsmanager.model.dto.UserDTO;
+import org.belligolifoundation.depliantsmanager.service.UserService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,21 +13,21 @@ import java.util.Collection;
 import java.util.List;
 
 @Service
-public class CustomUserDetailsService implements UserDetailsService {
+public class DMAUserDetailsService implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
-    public CustomUserDetailsService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public DMAUserDetailsService(UserService userService) {
+        this.userService = userService;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
+        UserDTO user = userService.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
-        return new CustomUserDetails(user.getId(), user.getUsername(), user.getPassword(), authorities(), user.getEmail());
+        return new DMAUserDetails(user.getId(), user.getUsername(), user.getPassword(), authorities(), user.getEmail());
     }
 
     public Collection<GrantedAuthority> authorities() {

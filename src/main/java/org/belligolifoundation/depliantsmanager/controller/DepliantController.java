@@ -1,7 +1,7 @@
 package org.belligolifoundation.depliantsmanager.controller;
 
 import org.belligolifoundation.depliantsmanager.model.dto.DepliantDTO;
-import org.belligolifoundation.depliantsmanager.security.CustomUserDetails;
+import org.belligolifoundation.depliantsmanager.security.DMAUserDetails;
 import org.belligolifoundation.depliantsmanager.service.DepliantService;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -23,7 +23,7 @@ public class DepliantController {
     }
 
     @GetMapping
-    public String listDepliants(Model model, @AuthenticationPrincipal CustomUserDetails userDetails,
+    public String listDepliants(Model model, @AuthenticationPrincipal DMAUserDetails userDetails,
                                 @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size,
                                 @RequestParam(required = false) String search, @RequestParam(defaultValue = "desc") String sortDirection) {
         Sort sort = Sort.by(Sort.Direction.fromString(sortDirection), "number");
@@ -44,7 +44,7 @@ public class DepliantController {
     }
 
     @PostMapping
-    public String saveDepliant(@ModelAttribute DepliantDTO depliantDTO, @AuthenticationPrincipal CustomUserDetails userDetails,
+    public String saveDepliant(@ModelAttribute DepliantDTO depliantDTO, @AuthenticationPrincipal DMAUserDetails userDetails,
                                Model model) {
         try {
             depliantDTO.setUserId(userDetails.getUserId());
@@ -65,7 +65,7 @@ public class DepliantController {
 
     @PutMapping("/{id}")
     public String updateDepliant(@PathVariable Long id, @ModelAttribute DepliantDTO depliantDTO,
-                                 @AuthenticationPrincipal CustomUserDetails userDetails, Model model) {
+                                 @AuthenticationPrincipal DMAUserDetails userDetails, Model model) {
         try {
             depliantDTO.setUserId(userDetails.getUserId());
             depliantDTO.setId(id);
