@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -36,6 +37,7 @@ public class DepliantServiceImpl implements DepliantService {
     }
 
     @Override
+    @PreAuthorize("@depliantAclServiceImpl.canAccess(#id)")
     public DepliantDTO getDepliantById(Long id) {
         logger.debug("Getting depliant by id [{}]...", id);
         var depliant = depliantRepository.findById(id).orElseThrow(() -> new DepliantNotFoundException(id));
@@ -50,6 +52,7 @@ public class DepliantServiceImpl implements DepliantService {
     }
 
     @Override
+    @PreAuthorize("@depliantAclServiceImpl.canAccess(#updatedDepliantDTO.id)")
     public DepliantDTO updateDepliant(DepliantDTO updatedDepliantDTO) {
         logger.debug("Updating depliant [{}]...", updatedDepliantDTO.getId());
         Optional<Depliant> optionalDepliant = depliantRepository.findById(updatedDepliantDTO.getId());
@@ -67,8 +70,9 @@ public class DepliantServiceImpl implements DepliantService {
     }
 
     @Override
-    public void deleteDepliant(Long depliantId) {
-        logger.debug("Deleting depliant [{}]...", depliantId);
-        depliantRepository.deleteById(depliantId);
+    @PreAuthorize("@depliantAclServiceImpl.canAccess(#id)")
+    public void deleteDepliant(Long id) {
+        logger.debug("Deleting depliant [{}]...", id);
+        depliantRepository.deleteById(id);
     }
 }

@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DepliantRepository extends JpaRepository<Depliant, Long>, JpaSpecificationExecutor<Depliant> {
+
+    boolean existsByIdAndUserId(Long id, Long userId);
 }

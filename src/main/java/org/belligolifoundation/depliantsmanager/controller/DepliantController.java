@@ -1,15 +1,13 @@
 package org.belligolifoundation.depliantsmanager.controller;
 
 import org.belligolifoundation.depliantsmanager.model.dto.DepliantDTO;
-import org.belligolifoundation.depliantsmanager.model.dto.UserDTO;
+import org.belligolifoundation.depliantsmanager.security.CustomUserDetails;
 import org.belligolifoundation.depliantsmanager.service.DepliantService;
-import org.belligolifoundation.depliantsmanager.service.UserService;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,20 +17,17 @@ import org.springframework.web.bind.annotation.*;
 public class DepliantController {
 
     private final DepliantService depliantService;
-    private final UserService userService;
 
-    public DepliantController(DepliantService depliantService, UserService userService) {
+    public DepliantController(DepliantService depliantService) {
         this.depliantService = depliantService;
-        this.userService = userService;
     }
 
     @GetMapping
-    public String listDepliants(Model model, @AuthenticationPrincipal UserDetails userDetails,
+    public String listDepliants(Model model, @AuthenticationPrincipal CustomUserDetails userDetails,
                                 @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size,
                                 @RequestParam(required = false) String search, @RequestParam(defaultValue = "desc") String sortDirection) {
-        UserDTO user = userService.findByUsername(userDetails.getUsername());
         Sort sort = Sort.by(Sort.Direction.fromString(sortDirection), "number");
-        Page<DepliantDTO> depliants = depliantService.getDepliantsByUser(user.getId(), PageRequest.of(page, size, sort), search);
+        Page<DepliantDTO> depliants = depliantService.getDepliantsByUser(userDetails.getUserId(), PageRequest.of(page, size, sort), search);
         model.addAttribute("depliants", depliants.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", depliants.getTotalPages());
@@ -49,11 +44,10 @@ public class DepliantController {
     }
 
     @PostMapping
-    public String saveDepliant(@ModelAttribute DepliantDTO depliantDTO, @AuthenticationPrincipal UserDetails userDetails,
+    public String saveDepliant(@ModelAttribute DepliantDTO depliantDTO, @AuthenticationPrincipal CustomUserDetails userDetails,
                                Model model) {
         try {
-            UserDTO user = userService.findByUsername(userDetails.getUsername());
-            depliantDTO.setUserId(user.getId());
+            depliantDTO.setUserId(userDetails.getUserId());
             depliantService.saveDepliant(depliantDTO);
             return "redirect:/depliants";
         } catch (Exception e) {
@@ -71,10 +65,9 @@ public class DepliantController {
 
     @PutMapping("/{id}")
     public String updateDepliant(@PathVariable Long id, @ModelAttribute DepliantDTO depliantDTO,
-                                 @AuthenticationPrincipal UserDetails userDetails, Model model) {
+                                 @AuthenticationPrincipal CustomUserDetails userDetails, Model model) {
         try {
-            UserDTO user = userService.findByUsername(userDetails.getUsername());
-            depliantDTO.setUserId(user.getId());
+            depliantDTO.setUserId(userDetails.getUserId());
             depliantDTO.setId(id);
             depliantService.updateDepliant(depliantDTO);
             return "redirect:/depliants";

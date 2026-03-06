@@ -46,7 +46,7 @@ public interface DepliantService {
     /**
      * Delete a depliant
      *
-     * @param depliantId Depliant id to delete
+     * @param id The id of depliant
      */
-    void deleteDepliant(Long depliantId);
+    void deleteDepliant(Long id);
 }
