@@ -7,16 +7,23 @@ import java.util.Collection;
 
 public class CustomUserDetails implements UserDetails {
 
-    private String username;
-    private String password;
-    private Collection<? extends GrantedAuthority> authorities;
-    private String email;
+    private final Long userId;
+    private final String username;
+    private final String password;
+    private final Collection<? extends GrantedAuthority> authorities;
+    private final String email;
 
-    public CustomUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities, String email) {
+    public CustomUserDetails(Long userId, String username, String password, Collection<? extends GrantedAuthority> authorities,
+                             String email) {
+        this.userId = userId;
         this.username = username;
         this.password = password;
         this.authorities = authorities;
         this.email = email;
+    }
+
+    public Long getUserId() {
+        return userId;
     }
 
     public String getEmail() {
