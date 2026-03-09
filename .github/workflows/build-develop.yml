@@ -1,0 +1,33 @@
+name: Build Depliants Manager Application (develop)
+
+on:
+  push:
+    branches:
+      - develop
+    paths-ignore:
+      - '*.md'
+      - 'src/main/docker/**'
+      - '.mvn/**'
+      - '.gitattributes'
+      - '.gitignore'
+      - 'mvnw'
+      - 'mvnw.cmd'
+
+jobs:
+  maven-compile-verify:
+    name: Maven Compile and Verify
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          server-id: 'github'
+          architecture: x64
+
+      - name: Maven Verify
+        run: mvn --batch-mode clean verify
