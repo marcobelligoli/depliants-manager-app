@@ -6,7 +6,7 @@ COPY pom.xml .
 
 COPY src ./src
 
-RUN mvn clean package -DskipTests
+RUN mvn clean package -DskipTests -DskipITs
 
 FROM eclipse-temurin:17-jdk-alpine
 
