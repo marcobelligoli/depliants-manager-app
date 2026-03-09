@@ -65,7 +65,8 @@ class DepliantControllerIT {
         mockMvc.perform(post("/depliants")
                         .param("number", "123")
                         .param("description", "test"))
-                .andExpect(status().isOk());
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/depliants"));
     }
 
     @Test
