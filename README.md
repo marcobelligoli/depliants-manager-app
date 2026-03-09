@@ -1,5 +1,7 @@
 # Depliants Manager App
 
+[![Build Depliants Manager Application (develop)](https://github.com/marcobelligoli/depliants-manager-app/actions/workflows/build-develop.yml/badge.svg)](https://github.com/marcobelligoli/depliants-manager-app/actions/workflows/build-develop.yml)
+
 ## Description
 
 The **Depliants Manager App** is a web-based application designed to manage and catalog depliants collected during
