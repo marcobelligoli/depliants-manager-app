@@ -37,7 +37,10 @@ Key cross-cutting points:
   - Single-item operations (get/update/delete) use `@PreAuthorize("@depliantAclServiceImpl.canAccess(#id)")` on `DepliantServiceImpl`; `DepliantAclServiceImpl` checks `existsByIdAndUserId` against the `DMAUserDetails` principal. New per-depliant service methods must carry the same annotation.
 - **Principal**: `security/DMAUserDetails` exposes `getUserId()`; controllers obtain it with `@AuthenticationPrincipal DMAUserDetails` and set `userId` on the DTO server-side (never trust the form).
 - **Mapping**: MapStruct mappers are used via the static `INSTANCE` (not Spring-injected). `DepliantMapper` maps `user.id` ↔ `userId` and builds a stub `User` for the entity side. Lombok/MapStruct ordering is configured in `pom.xml` annotation processor paths.
-- **HTTP method override**: `spring.mvc.hiddenmethod.filter.enabled=true`; Thymeleaf forms POST with a hidden `_method` (`put`/`delete`) to hit `@PutMapping`/`@DeleteMapping` endpoints. CSRF is disabled in `SecurityConfig`.
+- **HTTP method override**: `spring.mvc.hiddenmethod.filter.enabled=true`; Thymeleaf forms POST with a hidden `_method` (`put`/`delete`) to hit `@PutMapping`/`@DeleteMapping` endpoints.
+- **CSRF is enabled** (Spring Security default). Forms must use `th:action` so Thymeleaf injects the `_csrf` token; MockMvc tests for POST/PUT/DELETE need `.with(csrf())`.
+- **Never bind client-supplied ids on create**: mappers' `toEntity` ignore `id` (`@Mapping(target = "id", ignore = true)`), otherwise `JpaRepository.save` merges into an existing row (this was an account-takeover / ownership-transfer bug). `Depliant.user` is `updatable = false`.
+- ITs that insert rows should be `@Transactional` (rolled back): `data.sql` resets the id sequences before every test, so persisted inserts collide on ids.
 - **Security routes**: `/users/register`, `/users/login`, and static `/css`, `/js`, `/img` are public; login is processed at `/login`, success redirects to `/depliants`.
 - **Controller error handling**: form submissions catch exceptions and re-render `depliants/form` with an `errorData` model attribute (`DataIntegrityViolationException` → generic message).
 - **Schema changes**: add a new changelog under `src/main/resources/db/changelog/` and include it in `master.yaml`; do not edit already-applied changesets.
