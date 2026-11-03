@@ -5,13 +5,13 @@ import org.belligolifoundation.depliantsmanager.model.dto.UserDTO;
 import org.belligolifoundation.depliantsmanager.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -55,6 +55,24 @@ class UserServiceImplTest {
 
         verify(passwordEncoder).encode(PLAIN_PASSWORD);
         verify(userRepository).save(any(User.class));
+    }
+
+    @Test
+    void registerUser_shouldIgnoreClientSuppliedId() {
+
+        UserDTO dto = new UserDTO();
+        dto.setId(USER_ID);
+        dto.setUsername(USERNAME);
+        dto.setPassword(PLAIN_PASSWORD);
+
+        when(passwordEncoder.encode(PLAIN_PASSWORD)).thenReturn(ENCODED_PASSWORD);
+        when(userRepository.save(any(User.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+        service.registerUser(dto);
+
+        ArgumentCaptor<User> captor = ArgumentCaptor.forClass(User.class);
+        verify(userRepository).save(captor.capture());
+        assertNull(captor.getValue().getId(), "a registration must never target an existing user id");
     }
 
     @Test

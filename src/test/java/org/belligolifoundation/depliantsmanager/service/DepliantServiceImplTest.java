@@ -6,6 +6,7 @@ import org.belligolifoundation.depliantsmanager.model.dto.DepliantDTO;
 import org.belligolifoundation.depliantsmanager.repository.DepliantRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -98,6 +99,23 @@ class DepliantServiceImplTest {
         assertEquals(DEPLIANT_ID, result.getId());
 
         verify(depliantRepository).save(any());
+    }
+
+    @Test
+    void saveDepliant_shouldIgnoreClientSuppliedId() {
+
+        DepliantDTO dto = new DepliantDTO();
+        dto.setId(DEPLIANT_ID);
+        dto.setUserId(2L);
+
+        when(depliantRepository.save(any())).thenAnswer(invocation -> invocation.getArgument(0));
+
+        service.saveDepliant(dto);
+
+        ArgumentCaptor<Depliant> captor = ArgumentCaptor.forClass(Depliant.class);
+        verify(depliantRepository).save(captor.capture());
+        assertNull(captor.getValue().getId(), "creating a depliant must never target an existing depliant id");
+        assertEquals(2L, captor.getValue().getUser().getId());
     }
 
     @Test

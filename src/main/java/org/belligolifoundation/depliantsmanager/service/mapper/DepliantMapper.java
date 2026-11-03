@@ -15,6 +15,8 @@ public interface DepliantMapper {
     @Mapping(source = "user.id", target = "userId")
     DepliantDTO toDTO(Depliant depliant);
 
+    // id is never taken from the client: creating a depliant must not merge into (and re-own) an existing row
+    @Mapping(target = "id", ignore = true)
     @Mapping(target = "user", expression = "java(mapUserId(depliantDTO.getUserId()))")
     Depliant toEntity(DepliantDTO depliantDTO);
 
