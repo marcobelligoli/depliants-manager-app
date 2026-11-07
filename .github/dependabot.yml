@@ -1,0 +1,48 @@
+# Dependabot version updates. Patch bumps are auto-merged by .github/workflows/dependabot-auto-merge.yml once the
+# required "Maven Compile and Verify" check passes; minor and major bumps stay open for manual review.
+version: 2
+
+updates:
+  - package-ecosystem: maven
+    directory: /
+    target-branch: develop
+    schedule:
+      interval: weekly
+      day: monday
+      timezone: Europe/Rome
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: deps
+
+  # Actions are pinned to commit SHAs with the version in a comment: Dependabot updates both together.
+  - package-ecosystem: github-actions
+    directory: /
+    target-branch: develop
+    schedule:
+      interval: weekly
+      day: monday
+      timezone: Europe/Rome
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: ci
+
+  # Base images of the root Dockerfile.
+  - package-ecosystem: docker
+    directory: /
+    target-branch: develop
+    schedule:
+      interval: weekly
+      day: monday
+      timezone: Europe/Rome
+    commit-message:
+      prefix: docker
+
+  - package-ecosystem: docker-compose
+    directory: /src/main/docker/depliants-manager-app
+    target-branch: develop
+    schedule:
+      interval: weekly
+      day: monday
+      timezone: Europe/Rome
+    commit-message:
+      prefix: docker

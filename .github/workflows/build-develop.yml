@@ -12,6 +12,11 @@ on:
       - '.gitignore'
       - 'mvnw'
       - 'mvnw.cmd'
+  # No paths-ignore here: "Maven Compile and Verify" is a required check on develop, and a PR that skipped it
+  # (e.g. a Dependabot docker-compose bump) would never become mergeable.
+  pull_request:
+    branches:
+      - develop
 
 permissions:
   contents: read

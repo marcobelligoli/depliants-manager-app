@@ -76,3 +76,11 @@ Key cross-cutting points:
 
 Work happens on `develop`; `main` is the release branch. Versions are bumped in `pom.xml` (`x.y.z` release commit,
 then `x.(y+1).0-SNAPSHOT`).
+
+**Dependabot** (`.github/dependabot.yml`) opens weekly PRs against `develop` for Maven, GitHub Actions (pinned SHA
+and version comment updated together), the Dockerfile base images and the docker-compose images.
+`dependabot-auto-merge.yml` enables squash auto-merge only for `semver-patch` updates; GitHub merges them once the
+`Maven Compile and Verify` check passes, which `develop`'s branch protection requires (admins can still push
+directly). That is why `build-develop.yml` also runs on PRs into `develop`, without `paths-ignore`. Minor and major
+updates stay open for review. CI does not build the Docker image, so a Dockerfile/compose patch bump is merged
+without being exercised.
