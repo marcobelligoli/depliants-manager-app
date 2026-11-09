@@ -8,7 +8,7 @@ COPY src ./src
 
 RUN mvn clean package -DskipTests -DskipITs
 
-FROM eclipse-temurin:17-jdk-alpine
+FROM eclipse-temurin:25-jdk-alpine
 
 WORKDIR /depliants-manager-app
 
